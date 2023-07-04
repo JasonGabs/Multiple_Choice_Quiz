@@ -31,7 +31,7 @@ body {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
   }
 
-  .items {
+  .quizArea {
     display: inline-flex;
     margin: 20%;
     padding: 20px;

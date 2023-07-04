@@ -1,108 +1,167 @@
-var firstButton = document.querySelector("#button1");
-var secondButton = document.querySelector("#button2");
-var thirdButton = document.querySelector("#button3");
-var fourthButton = document.querySelector("#button4");
-var startGameButton = document.querySelector("#startGameButton");
-var timer = document.getElementById("#timer");
-var activeQuestion = document.getElementById(".questions");
+// const firstButton = document.querySelector("#button1");
+// const secondButton = document.querySelector("#button2");
+// const thirdButton = document.querySelector("#button3");
+// const fourthButton = document.querySelector("#button4");
+const startGameButton = document.getElementById("startGameButton");
+const timer = document.getElementById("#timer");
+// var activeQuestion = document.getElementById(".questions");
 
-var question1 = "How many feet are in 1500 meters?";
-var question2 = "What is the second tallest mountain in the world?";
-var question3 = "What is the answer to this math problem: 40 + 23 - 83 * 0 + 200 + 49 - 51?"
 var gameOver = document.getElementById("#gameOverScreen")
 
-var allQuestions = [question1, question2, question3, gameOver]
-var correctButton = false;
-
+var allQuestions = [
+    {
+        question: "How many feet are in 1500 meters?",
+        options: ["4756", "1000", "N/A", "4921"],
+        answer: "4921",
+    },
+    {
+        question: "What is the second tallest mountain in the world?",
+        options: ["Everest", "Kilimanjaro", "K2", "Coyola"],
+        answer: "K2",
+    },
+    {
+        question: "What is the answer to this math problem: (40 + 23 - 83 + 200 + 49 - 51) * 0?",
+        options: ["0", "252", "1000", "-1000"],
+        answer: "0",
+    },
+    {
+        question: "Game Over!",
+    },
+]
+var currentIndex = 0;
 var storedScores = [];
 var timeScore = 0;
-hideElements ();
-startGameButton = document.addEventListener("click", function () {
-    showQuestions();
-    firstQuestion();
-    secondQuestion();
-    thirdQuestion();
+// hideElements ();
+startGameButton.addEventListener("click", function () {
+    // showQuestions();
+    updateQuestionText();
+    // secondQuestion();
+    // thirdQuestion();
 })
 
-function hideElements () {
-    firstButton.style.display = "none";
-    secondButton.style.display = "none";
-    thirdButton.style.display = "none";
-    fourthButton.style.display = "none";
-    gameOverText.style.display = "none";
-}
-function showQuestions() {
-   firstButton.style.display = "inline-flex";
-   secondButton.style.display = "inline-flex";
-   thirdButton.style.display = "inline-flex";
-   fourthButton.style.display = "inline-flex";
-   startGameButton.style.display = "none";
+
+function updateQuestionText() {
+    
+    // allQuestions[0].style.display = "inline-flex";
+    // for (var i = 0; i < allQuestions.length; i++) {
+
+        document.querySelector("#buttonArea").textContent = "";
+
+        var mainQuestion = document.querySelector("#question1");
+        mainQuestion.textContent = allQuestions[currentIndex].question;
+
+        for (var i = 0; i < allQuestions[currentIndex].options.length; i++) {
+            var questionButton = document.createElement("button");
+            
+            questionButton.onclick = function() {
+                nextQuestion();
+            }
+            
+            questionButton.textContent = allQuestions[currentIndex].options[i];
+            document.querySelector("#buttonArea").appendChild(questionButton);
+        }
+        
 }
 
-function firstQuestion() {
-    activeQuestion = allQuestions[0];
-    activeQuestion.style.display = "inline-flex";
-    if (activeQuestion = allQuestions[0]) {
-        firstButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        });
-            
-        secondButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        });
-            
-        thirdButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        });
-            
-        fourthButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        }); 
-           
-    }
+function nextQuestion () {
+    currentIndex++;
+    updateQuestionText();
 }
+// function hideElements () {
+//     firstButton.style.display = "none";
+//     secondButton.style.display = "none";
+//     thirdButton.style.display = "none";
+//     fourthButton.style.display = "none";
+//     gameOverText.style.display = "none";
+// }
+// function showQuestions() {
+//    firstButton.style.display = "inline-flex";
+//    secondButton.style.display = "inline-flex";
+//    thirdButton.style.display = "inline-flex";
+//    fourthButton.style.display = "inline-flex";
+//    startGameButton.style.display = "none";
+// }
 
-function secondQuestion() {
-    if (activeQuestion = allQuestions[1]) {
-        firstButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        });
-            
-        secondButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        });
-            
-        thirdButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        });
-            
-        fourthButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        }); 
-           
-    }
-}
+// This fuction iterates to the next question when it's called
 
-function thirdQuestion() {
-    if (activeQuestion = allQuestions[2]) {
-        firstButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        });
+
+// function secondQuestion() {
+//     if (activeQuestion = allQuestions[1]) {
+//         firstButton = document.addEventListener("click", function () {
+//             allQuestions++;
+//         });
             
-        secondButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        });
+//         secondButton = document.addEventListener("click", function () {
+//             allQuestions++;
+//         });
             
-        thirdButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        });
+//         thirdButton = document.addEventListener("click", function () {
+//             allQuestions++;
+//         });
             
-        fourthButton = document.addEventListener("click", function () {
-            activeQuestion++;
-        }); 
+//         fourthButton = document.addEventListener("click", function () {
+//             allQuestions++;
+//         }); 
            
-    }
-}
+//     }
+// }
+
+// function thirdQuestion() {
+//     if (activeQuestion = allQuestions[2]) {
+//         firstButton = document.addEventListener("click", function () {
+//             allQuestions++;
+//         });
+            
+//         secondButton = document.addEventListener("click", function () {
+//             allQuestions++;
+//         });
+            
+//         thirdButton = document.addEventListener("click", function () {
+//             allQuestions++;
+//         });
+            
+//         fourthButton = document.addEventListener("click", function () {
+//             allQuestions++;
+//         }); 
+           
+//     }
+// }
+// firstButton = document.addEventListener("click", function () {
+        //     firstButton.textContent = allQuestions[currentIndex];
+        //     currentIndex++;
+        //     questionTest();
+        // });
+            
+        // secondButton = document.addEventListener("click", function () {
+        //     allQuestions++;
+        // });
+            
+        // thirdButton = document.addEventListener("click", function () {
+        //     allQuestions++;
+        // });
+            
+        // fourthButton = document.addEventListener("click", function () {
+        //     allQuestions++;
+        // }); 
+    // }
+    // if (activeQuestion = allQuestions[0]) {
+        // firstButton = document.addEventListener("click", function () {
+        //     allQuestions++;
+        // });
+            
+        // secondButton = document.addEventListener("click", function () {
+        //     allQuestions++;
+        // });
+            
+        // thirdButton = document.addEventListener("click", function () {
+        //     allQuestions++;
+        // });
+            
+        // fourthButton = document.addEventListener("click", function () {
+        //     allQuestions++;
+        // }); 
+           
+    // }
 // if (activeQuestion = allQuestions[3]) {
 
 // }
