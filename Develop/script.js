@@ -2,12 +2,12 @@
 // const secondButton = document.querySelector("#button2");
 // const thirdButton = document.querySelector("#button3");
 // const fourthButton = document.querySelector("#button4");
-const startGameButton = document.getElementById("startGameButton");
-const timer = document.getElementById("#timer");
+var startGameButton = document.getElementById("startGameButton");
+var timer = document.getElementById("timer");
 // var activeQuestion = document.getElementById(".questions");
 
 var gameOver = document.getElementById("#gameOverScreen")
-
+var mainQuestion = document.querySelector("#question1");
 var allQuestions = [
     {
         question: "How many feet are in 1500 meters?",
@@ -20,21 +20,27 @@ var allQuestions = [
         answer: "K2",
     },
     {
-        question: "What is the answer to this math problem: (40 + 23 - 83 + 200 + 49 - 51) * 0?",
+        question: "Solve for x: (40 + 200 + 49 - 51) * 0 = x",
         options: ["0", "252", "1000", "-1000"],
         answer: "0",
     },
     {
         question: "Game Over!",
+        options: []
+
     },
 ]
 var currentIndex = 0;
 var storedScores = [];
-var timeScore = 0;
+
+var timeLeft = 30;
+timer.textContent = timeLeft + " seconds remaining";
 // hideElements ();
 startGameButton.addEventListener("click", function () {
     // showQuestions();
+    timerCountdown();
     updateQuestionText();
+    startGameButton.style.display = "none";
     // secondQuestion();
     // thirdQuestion();
 })
@@ -44,29 +50,76 @@ function updateQuestionText() {
     
     // allQuestions[0].style.display = "inline-flex";
     // for (var i = 0; i < allQuestions.length; i++) {
-
         document.querySelector("#buttonArea").textContent = "";
-
-        var mainQuestion = document.querySelector("#question1");
         mainQuestion.textContent = allQuestions[currentIndex].question;
-
         for (var i = 0; i < allQuestions[currentIndex].options.length; i++) {
             var questionButton = document.createElement("button");
-            
-            questionButton.onclick = function() {
-                nextQuestion();
-            }
+            console.log(questionButton);
             
             questionButton.textContent = allQuestions[currentIndex].options[i];
             document.querySelector("#buttonArea").appendChild(questionButton);
+            
+            questionButton.onclick = function () { 
+                if (questionButton.textContent != allQuestions[currentIndex].answer) {
+                    timeLeft = timeLeft - 5
+                    nextQuestion();
+                } else {
+                    nextQuestion();
+                }
+            }
         }
         
 }
 
 function nextQuestion () {
+    if (allQuestions[currentIndex].question === "Game Over!") {
+        return
+    }
     currentIndex++;
     updateQuestionText();
 }
+
+
+
+function timerCountdown () {
+timeLeft = 200;
+timeLeft--;
+var timeInterval = setInterval(function () {
+
+    if (timeLeft > 1 && allQuestions[currentIndex].question !== "Game Over!") {
+      timer.textContent = timeLeft + ' seconds remaining';
+      timeLeft--;
+
+    } else if (timeLeft === 1) {
+      timer.textContent = timeLeft + ' second remaining';
+      timeLeft--;
+
+    } else {
+      timer.textContent = "Times Up!";
+      mainQuestion.textContent = allQuestions[allQuestions.length - 1].question;
+      document.querySelector("#buttonArea").textContent = "";
+      startGameButton.style.display = "";
+      currentIndex = 0;
+      clearInterval(timeInterval);
+    }
+  }, 1000);
+}
+
+// function playAgain () {
+//     if (allQuestions[currentIndex].question = "Game Over!") {
+//         var playAgainButton = document.createElement("button");
+//         document.querySelector("#buttonArea").appendChild(playAgainButton);
+//         playAgainButton.textContent = "Play Again?";
+        
+//         playAgainButton.onclick = function () {
+//             timerCountdown();
+//             updateQuestionText();
+//             startGameButton.style.display = "none";
+//         }
+//     }
+// }
+
+
 // function hideElements () {
 //     firstButton.style.display = "none";
 //     secondButton.style.display = "none";
