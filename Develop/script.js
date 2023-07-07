@@ -53,7 +53,7 @@ function updateQuestionText() {
             questionButton.textContent = allQuestions[currentIndex].options[i];
 
             document.querySelector("#buttonArea").appendChild(questionButton);
-            questionButton.addEventListener = ("click", function (event) {
+            questionButton.addEventListener("click", function (event) {
                 var element = event.target;
                 if (element === allQuestions[currentIndex].answer) {
                     nextQuestion();
