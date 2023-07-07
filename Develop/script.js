@@ -4,7 +4,6 @@
 // const fourthButton = document.querySelector("#button4");
 var startGameButton = document.getElementById("startGameButton");
 var timer = document.getElementById("timer");
-// var activeQuestion = document.getElementById(".questions");
 var scoresList = document.querySelector("#scoresList");
 var gameOver = document.getElementById("#gameOverScreen")
 var mainQuestion = document.querySelector("#question1");
@@ -36,29 +35,23 @@ var storedScores = [];
 
 var timeLeft = 30;
 timer.textContent = timeLeft + " seconds remaining";
-// hideElements ();
+
 startGameButton.addEventListener("click", function () {
-    // showQuestions();
     timerCountdown();
     updateQuestionText();
     startGameButton.style.display = "none";
-    // secondQuestion();
-    // thirdQuestion();
 })
 
 
 function updateQuestionText() {
     
-    // allQuestions[0].style.display = "inline-flex";
-    // for (var i = 0; i < allQuestions.length; i++) {
         document.querySelector("#buttonArea").textContent = "";
         mainQuestion.textContent = allQuestions[currentIndex].question;
         for (var i = 0; i < allQuestions[currentIndex].options.length; i++) {
             var questionButton = document.createElement("button");
             
             questionButton.textContent = allQuestions[currentIndex].options[i];
-            // questionButton.setAttribute("data-index", i);
-            // questionButton.id = i;
+
             document.querySelector("#buttonArea").appendChild(questionButton);
             questionButton.addEventListener = ("click", function (event) {
                 var element = event.target;
@@ -69,25 +62,9 @@ function updateQuestionText() {
                     timeLeft = timeLeft - 5;
                 }
             })
-            // if (questionButton.onclick != allQuestions[currentIndex].answer) { 
-            //     timeLeft = timeLeft - 5;
-            //     nextQuestion();
-            // } else {
-            //     nextQuestion
-            // console.log(questionButton)
-            // console.log(questionButton.textContent)
             console.log(allQuestions[currentIndex].options)
         }
-        // document.querySelector()
-        // questionButton.addEventListener = ("click", function (event) {
-        //     var element = event.target;
-        //     if (element === allQuestions[currentIndex].answer) {
-        //         nextQuestion();
-        //     } else {
-        //         nextQuestion();
-        //         timeLeft = timeLeft - 5
-        //     }
-        // })
+        
 }
 
 function nextQuestion () {
@@ -131,6 +108,20 @@ var timeInterval = setInterval(function () {
   }, 1000);
 }
 
+// questionButton.setAttribute("data-index", i);
+// questionButton.id = i;
+
+// document.querySelector()
+        // questionButton.addEventListener = ("click", function (event) {
+        //     var element = event.target;
+        //     if (element === allQuestions[currentIndex].answer) {
+        //         nextQuestion();
+        //     } else {
+        //         nextQuestion();
+        //         timeLeft = timeLeft - 5
+        //     }
+        // })
+
 // for (var i = 0; i < storedScores.length; i++) {
 //     var currentScore = storedScores[i];
 
@@ -162,6 +153,14 @@ var timeInterval = setInterval(function () {
 // function renderScoresList () {
 
 // }
+
+// if (questionButton.onclick != allQuestions[currentIndex].answer) { 
+            //     timeLeft = timeLeft - 5;
+            //     nextQuestion();
+            // } else {
+            //     nextQuestion
+            // console.log(questionButton)
+            // console.log(questionButton.textContent)
 
 // function playAgain () {
 //     if (allQuestions[currentIndex].question = "Game Over!") {
