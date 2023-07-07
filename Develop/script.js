@@ -5,9 +5,10 @@
 var startGameButton = document.getElementById("startGameButton");
 var timer = document.getElementById("timer");
 // var activeQuestion = document.getElementById(".questions");
-
+var scoresList = document.querySelector("#scoresList");
 var gameOver = document.getElementById("#gameOverScreen")
 var mainQuestion = document.querySelector("#question1");
+// var dataIndex = document.querySelector("")
 var allQuestions = [
     {
         question: "How many feet are in 1500 meters?",
@@ -54,21 +55,39 @@ function updateQuestionText() {
         mainQuestion.textContent = allQuestions[currentIndex].question;
         for (var i = 0; i < allQuestions[currentIndex].options.length; i++) {
             var questionButton = document.createElement("button");
-            console.log(questionButton);
             
             questionButton.textContent = allQuestions[currentIndex].options[i];
+            // questionButton.setAttribute("data-index", i);
+            // questionButton.id = i;
             document.querySelector("#buttonArea").appendChild(questionButton);
-            
-            questionButton.onclick = function () { 
-                if (questionButton.textContent != allQuestions[currentIndex].answer) {
-                    timeLeft = timeLeft - 5
+            questionButton.addEventListener = ("click", function (event) {
+                var element = event.target;
+                if (element === allQuestions[currentIndex].answer) {
                     nextQuestion();
                 } else {
                     nextQuestion();
+                    timeLeft = timeLeft - 5;
                 }
-            }
+            })
+            // if (questionButton.onclick != allQuestions[currentIndex].answer) { 
+            //     timeLeft = timeLeft - 5;
+            //     nextQuestion();
+            // } else {
+            //     nextQuestion
+            // console.log(questionButton)
+            // console.log(questionButton.textContent)
+            console.log(allQuestions[currentIndex].options)
         }
-        
+        // document.querySelector()
+        // questionButton.addEventListener = ("click", function (event) {
+        //     var element = event.target;
+        //     if (element === allQuestions[currentIndex].answer) {
+        //         nextQuestion();
+        //     } else {
+        //         nextQuestion();
+        //         timeLeft = timeLeft - 5
+        //     }
+        // })
 }
 
 function nextQuestion () {
@@ -82,11 +101,17 @@ function nextQuestion () {
 
 
 function timerCountdown () {
-timeLeft = 200;
+timeLeft = 30;
 timeLeft--;
 var timeInterval = setInterval(function () {
-
-    if (timeLeft > 1 && allQuestions[currentIndex].question !== "Game Over!") {
+    if (allQuestions[currentIndex].question === "Game Over!") {
+        timer.textContent = timeLeft;
+        document.querySelector("#buttonArea").textContent = "";
+        startGameButton.style.display = "";
+        startGameButton.textContent = "Play Again?";
+        currentIndex = 0;
+        clearInterval(timeInterval);
+    } else if (timeLeft > 1) {
       timer.textContent = timeLeft + ' seconds remaining';
       timeLeft--;
 
@@ -99,11 +124,44 @@ var timeInterval = setInterval(function () {
       mainQuestion.textContent = allQuestions[allQuestions.length - 1].question;
       document.querySelector("#buttonArea").textContent = "";
       startGameButton.style.display = "";
+      startGameButton.textContent = "Play Again?";
       currentIndex = 0;
       clearInterval(timeInterval);
     }
   }, 1000);
 }
+
+// for (var i = 0; i < storedScores.length; i++) {
+//     var currentScore = storedScores[i];
+
+//     var li = document.createElement("li");
+//     li.textContent = currentScore;
+//     li.setAttribute("data-index", i);
+
+//     scoresList.appendChild(li);
+//   }
+  
+//   scoreButton.addEventListener("click", function(event) {
+//     var element = event.target;
+  
+//     // Checks if element is a button
+//     if (element.matches("button") === true) {
+//       // Get its data-index value and remove the todo element from the list
+//       var index = element.parentElement.getAttribute("data-index");
+//       todos.splice(index, 1);
+  
+//       // Store updated todos in localStorage, re-render the list
+//       renderScoresList();
+//     }
+// });
+
+// function saveToLocalStorage () {
+//     localStorage.setItem("Stored Scores", JSON.stringify(storedScores));
+
+// }
+// function renderScoresList () {
+
+// }
 
 // function playAgain () {
 //     if (allQuestions[currentIndex].question = "Game Over!") {
