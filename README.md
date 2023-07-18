@@ -3,9 +3,9 @@
 This quiz app has:
 
 
-a list of questions and answers.
+A list of questions and answers.
 
-stores scores to the local history.
+Scores to the local history.
 
 Has a button to display the scores.
 
