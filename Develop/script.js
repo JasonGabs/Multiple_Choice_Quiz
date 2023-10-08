@@ -1,7 +1,4 @@
-// const firstButton = document.querySelector("#button1");
-// const secondButton = document.querySelector("#button2");
-// const thirdButton = document.querySelector("#button3");
-// const fourthButton = document.querySelector("#button4");
+
 var startGameButton = document.getElementById("startGameButton");
 var timer = document.getElementById("timer");
 var scoresList = document.querySelector("#scoresListButton");
